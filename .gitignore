@@ -1,1 +1,4 @@
 src/build
+*.pyc
+*.swp
+*.swo
