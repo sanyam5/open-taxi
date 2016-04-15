@@ -19,7 +19,7 @@ enum MType {
   PREDECESSOR_LEAVING,
   PREDECESSOR_ALIVE,
   PREDECESSOR_ALIVE_ANSWER
-}
+};
 
 
 class Message {

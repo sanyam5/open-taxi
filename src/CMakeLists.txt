@@ -9,7 +9,7 @@ set(LIBS sigc-2.0 simgrid)
 add_executable(testing pingpong.cpp)
 target_link_libraries(testing sigc-2.0 ${LIBS})
 
-add_executable(chord chord.cpp)
+add_executable(chord chord.cpp node.cpp)
 target_link_libraries(chord sigc-2.0 ${LIBS})
 
 # add_subdirectory(chord-c)

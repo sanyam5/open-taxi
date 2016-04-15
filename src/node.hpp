@@ -2,6 +2,8 @@
 #include <bits/stdc++.h>
 #include <stdio.h>
 #include "message.hpp"
+#include "simgrid/msg.h"
+#include "xbt/log.h"
 using namespace std;
 
 
@@ -27,17 +29,17 @@ extern long int smx_total_comms;
 // a chord node
 class Node {
   int id;                                 // my id
+  string ip_prefix;
   string ip;                              // ip address for communication
   // char mailbox[MAILBOX_NAME_SIZE];        // my mailbox name (string representation of the id)
   vector<pair<int, string> > fingers;                    // finger table, of size nb_bits (fingers[0] is my successor)
   int pred_id;                            // predecessor id
-  char pred_ip;   // predecessor's mailbox name
+  string pred_ip;   // predecessor's mailbox name
   int next_finger_to_fix;                 // index of the next finger to fix in fix_fingers()
-  Message comm_receive;                // current communication to receive
+  msg_comm_t comm_receive;                // current communication to receive
   double last_change_date;                // last time I changed a finger or my predecessor
-  string ip_prefix;
 public:
-  void Node(int id, string ip_prefix); // prefix is used for id2ip
+  Node(int id, string ip_prefix); // prefix is used for id2ip
   int join(int known_id);
   void leave();
   int find_successor(int id);
@@ -72,4 +74,4 @@ private:
 
   bool sendMessage(Message m, string ip);
   bool recvMessage(Message &m, string ip);
-}
+};
