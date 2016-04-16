@@ -57,9 +57,8 @@ class Daemon(threading.Thread):
 
 # class representing a local peer
 class Local(object):
-	def __init__(self, local_address, remote_address = None, setid=None):
+	def __init__(self, local_address, remote_address = None):
 		self.address_ = local_address
-		self.setid = setid
 		print "self id = %s" % self.id()
 		self.shutdown_ = False
 		# list of successors
@@ -184,8 +183,6 @@ class Local(object):
 		return map(lambda node: (node.address_.ip, node.address_.port), self.successors_[:N_SUCCESSORS-1])
 
 	def id(self, offset = 0):
-		if self.setid:
-			return (self.setid + offset) % SIZE
 		return (self.address_.__hash__() + offset) % SIZE
 
 	def successor(self):
