@@ -184,7 +184,8 @@ class Local(object):
 		return map(lambda node: (node.address_.ip, node.address_.port), self.successors_[:N_SUCCESSORS-1])
 
 	def id(self, offset = 0):
-		if self.setid: return self.setid
+		if self.setid:
+			return (self.setid + offset) % SIZE
 		return (self.address_.__hash__() + offset) % SIZE
 
 	def successor(self):
